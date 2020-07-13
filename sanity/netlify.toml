@@ -5,7 +5,7 @@
 
 [build.environment]
   YARN_VERSION = "1.21.1"
-  USE_YARN = true
+  USE_YARN = "true"
 
 [[redirects]]
   from = "/*"
