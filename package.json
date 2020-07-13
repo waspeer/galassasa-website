@@ -1,0 +1,13 @@
+{
+  "name": "galassasa-website",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:waspeer/galassasa-website.git",
+  "author": "Wannes Salomé <mail@wannessalome.nl>",
+  "license": "MIT",
+  "private": true,
+  "workspaces": [
+    "web",
+    "sanity"
+  ]
+}
