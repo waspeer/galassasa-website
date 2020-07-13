@@ -9,5 +9,8 @@
   "workspaces": [
     "web",
     "sanity"
-  ]
+  ],
+  "devDependencies": {
+    "poetic": "^1.5.0"
+  }
 }
