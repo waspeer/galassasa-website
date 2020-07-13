@@ -3,6 +3,7 @@ import schemaTypes from 'all:part:@sanity/base/schema-type';
 
 import { Person } from './documents/person';
 import { SocialLink } from './objects/social-link';
+import { Studio } from './documents/studio';
 
 export default createSchema({
   name: 'default',
@@ -12,5 +13,6 @@ export default createSchema({
 
     // DOCUMENTS
     Person,
+    Studio,
   ]),
 });

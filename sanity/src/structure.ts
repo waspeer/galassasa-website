@@ -1,5 +1,5 @@
 import S from '@sanity/desk-tool/structure-builder';
-import { BsFillPeopleFill } from 'react-icons/bs';
+import { BsFillPeopleFill, BsBuilding } from 'react-icons/bs';
 
 export default () =>
   S.list()
@@ -17,4 +17,9 @@ export default () =>
               ),
             ),
         ),
+      S.documentListItem()
+        .icon(BsBuilding)
+        .id('galassasa')
+        .schemaType('studio')
+        .title('Over de Studio'),
     ]);
