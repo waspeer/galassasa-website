@@ -1,6 +1,6 @@
 import { DocumentType } from '../../lib/data-types';
 
-export const Studio: DocumentType = {
+export const Studio: DocumentType<'studioPhoto'> = {
   name: 'studio',
   title: 'Studio',
   type: 'document',
@@ -15,13 +15,7 @@ export const Studio: DocumentType = {
       name: 'photos',
       title: "Foto's",
       type: 'array',
-      of: [
-        {
-          name: 'photo',
-          title: 'Foto',
-          type: 'image',
-        },
-      ],
+      of: [{ type: 'studioPhoto' }],
     },
   ],
 };

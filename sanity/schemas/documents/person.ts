@@ -1,8 +1,6 @@
-import { BsLink45Deg } from 'react-icons/bs';
-
 import { DocumentType } from '../../lib/data-types';
 
-export const Person: DocumentType<'socialLink'> = {
+export const Person: DocumentType<'projectLink' | 'socialLink'> = {
   name: 'person',
   title: 'Persoon',
   type: 'document',
@@ -73,28 +71,7 @@ export const Person: DocumentType<'socialLink'> = {
       name: 'projectLinks',
       title: 'Projecten',
       type: 'array',
-      of: [
-        {
-          icon: BsLink45Deg,
-          name: 'project',
-          title: 'Project',
-          type: 'object',
-          fields: [
-            {
-              name: 'name',
-              title: 'Naam Project',
-              type: 'string',
-              validation: (Rule) => Rule.required(),
-            },
-            {
-              name: 'url',
-              title: 'Link',
-              type: 'url',
-              validation: (Rule) => Rule.required(),
-            },
-          ],
-        },
-      ],
+      of: [{ type: 'projectLink' }],
     },
     {
       fieldset: 'links',
