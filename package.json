@@ -6,7 +6,8 @@
   "author": "Wannes Salomé <mail@wannessalome.nl>",
   "license": "MIT",
   "scripts": {
-    "dev:sanity": "yarn workspace sanity dev"
+    "dev:sanity": "yarn workspace sanity dev",
+    "dev:web": "yarn workspace web dev"
   },
   "private": true,
   "workspaces": [
