@@ -5,15 +5,17 @@ import { Person } from './documents/person';
 import { Studio } from './documents/studio';
 import { ProjectLink } from './objects/project-link';
 import { SocialLink } from './objects/social-link';
-import { StudioPhoto } from './objects/studio-photo';
+import { Figure } from './objects/figure';
+import { TextBlockWithImage } from './objects/text-block-with-image';
 
 export default createSchema({
   name: 'default',
   types: schemaTypes.concat([
     // OBJECTS
+    Figure,
     ProjectLink,
     SocialLink,
-    StudioPhoto,
+    TextBlockWithImage,
 
     // DOCUMENTS
     Person,

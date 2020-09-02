@@ -1,6 +1,6 @@
 import { BsLink45Deg } from 'react-icons/bs';
 
-import { ObjectType, UrlValidator } from '../../lib/data-types';
+import { ObjectType } from '../../lib/data-types';
 
 export const SocialLink: ObjectType = {
   name: 'socialLink',
@@ -24,8 +24,8 @@ export const SocialLink: ObjectType = {
       name: 'url',
       title: 'URL',
       type: 'url',
-      validation: (Rule: UrlValidator) =>
-        Rule.uri().custom((url, context) => {
+      validation: (Rule) =>
+        Rule.uri().custom<string>((url, context) => {
           const urlType = context.parent.type as string | undefined;
 
           if (urlType === 'instagram') {

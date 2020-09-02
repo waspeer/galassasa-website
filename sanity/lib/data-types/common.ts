@@ -16,8 +16,8 @@ export interface Validator<T> {
   /**
    * Creates a custom validation rule.
    */
-  custom<T = any>(
-    customRule: (field: T, context: CustomRuleContext) => true | string | Promise<true | string>,
+  custom<S = any>(
+    customRule: (field: S, context: CustomRuleContext) => true | string | Promise<true | string>,
   ): T;
 
   /**
@@ -26,7 +26,7 @@ export interface Validator<T> {
   either(children: T): T;
 
   /**
-   * Set the rule to be a warning. The message can be customized.
+   * Set the rule to be an error. The message can be customized.
    */
   error(message: string): T;
 
@@ -65,7 +65,7 @@ export interface Validator<T> {
   warning(message?: string): T;
 }
 
-export type ValidatorFunction<T extends Validator<any>> = (Rule: T) => T;
+export type ValidatorFunction<T extends Validator<any>> = (Rule: T) => T | T[];
 
 export interface DataType {
   /**

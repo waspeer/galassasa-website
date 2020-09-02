@@ -5,6 +5,9 @@
   "repository": "git@github.com:waspeer/galassasa-website.git",
   "author": "Wannes Salomé <mail@wannessalome.nl>",
   "license": "MIT",
+  "scripts": {
+    "dev:sanity": "yarn workspace sanity dev"
+  },
   "private": true,
   "workspaces": [
     "web",

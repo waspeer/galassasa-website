@@ -32,6 +32,26 @@ export interface StringValidator extends Validator<StringValidator> {
   uppercase(): StringValidator;
 
   /**
+   * Provide options for validation of URL
+   */
+  uri(options?: {
+    /**
+     * Whether or not to allow relative URLs (default: false).
+     */
+    allowRelative?: boolean;
+
+    /**
+     * Whether to only allow relative URLs (default: false).
+     */
+    relativeOnly?: boolean;
+
+    /**
+     * String, RegExp or Array of schemes to allow (default: ['http', 'https']).
+     */
+    scheme?: string | RegExp | string[];
+  }): StringValidator;
+
+  /**
    * String must match the given pattern.
    *
    * `options` is an optional object, currently you can set `options.name`
@@ -71,5 +91,5 @@ export interface StringType extends DataType {
     direction?: 'horizontal' | 'vertical';
   };
 
-  validation?: ValidatorFunction<StringValidator>;
+  validation?: ValidatorFunction<StringValidator> | ValidatorFunction<StringValidator>[];
 }

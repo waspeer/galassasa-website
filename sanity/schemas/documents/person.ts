@@ -13,6 +13,9 @@ export const Person: DocumentType<'projectLink' | 'socialLink'> = {
       name: 'photo',
       title: 'Foto',
       type: 'image',
+      options: {
+        hotspot: true,
+      },
       validation: (Rule) => Rule.required().error('Kies een foto'),
     },
     {
