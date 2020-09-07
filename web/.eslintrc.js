@@ -4,6 +4,8 @@ module.exports = {
     '@typescript-eslint/explicit-function-return-type': 'off',
     '@typescript-eslint/no-explicit-any': 'off',
     '@typescript-eslint/no-non-null-assertion': 'off',
+    'import/extensions': 'off',
+    'import/no-unresolved': 'off',
     'import/no-duplicates': 'off',
     'import/order': [
       'error',
@@ -22,7 +24,9 @@ module.exports = {
       },
     ],
     'import/prefer-default-export': 'off',
+    'jsx-a11y/anchor-is-valid': 'off',
     'no-underscore-dangle': 'off',
     'react/react-in-jsx-scope': 'off',
+    'react/require-default-props': 'off',
   },
 };

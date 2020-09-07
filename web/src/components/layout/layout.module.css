@@ -1,0 +1,157 @@
+@keyframes disappear {
+  0% {
+    opacity: 1;
+  }
+
+  99% {
+    opacity: 0;
+    transform: scale(1);
+    left: 0;
+  }
+
+  100% {
+    transform: scale(0.001);
+    left: -9999px;
+  }
+}
+
+@keyframes appear {
+  0% {
+    transform: scale(1);
+    left: 0;
+  }
+
+  1% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+.logo {
+  max-width: 450px;
+  @apply mb-8;
+}
+
+.menu {
+  --menu-closed-offset: theme('spacing.8');
+  --menu-closed-size: theme('spacing.12');
+  --menu-icon-size: calc(var(--menu-closed-size) / 3);
+  --menu-icon-line-size: calc(var(--menu-closed-size) * 0.07);
+
+  @apply bg-neutral border-black;
+  position: fixed;
+  top: var(--menu-closed-offset);
+  right: var(--menu-closed-offset);
+  width: var(--menu-closed-size);
+  height: var(--menu-closed-size);
+  border-radius: 50%;
+  transition: all 0.5s;
+  overflow: hidden;
+  border: 1px solid;
+  box-shadow: 1px 1px black;
+}
+
+.menu button {
+  position: fixed;
+  top: var(--menu-closed-offset);
+  right: var(--menu-closed-offset);
+  width: var(--menu-closed-size);
+  height: var(--menu-closed-size);
+  z-index: 10;
+}
+
+.menu button.hidden {
+  display: none;
+}
+
+.menu button::before,
+.menu button::after {
+  content: '';
+  box-sizing: border-box;
+  border: var(--menu-icon-line-size) solid;
+  @apply border-black;
+  border-left: none;
+  border-right: none;
+  border-radius: 1px;
+  position: absolute;
+  top: calc(((var(--menu-closed-size) - var(--menu-icon-size)) / 2));
+  right: calc(((var(--menu-closed-size) - var(--menu-icon-size)) / 2));
+  width: var(--menu-icon-size);
+  transition: all 0.5s;
+}
+
+.menu button::before {
+  height: calc((var(--menu-icon-size) / 2) + (var(--menu-icon-line-size) / 2));
+}
+
+.menu button::after {
+  height: var(--menu-icon-size);
+  border-top: none;
+}
+
+.menu.open button::before,
+.menu.open button::after {
+  height: var(--menu-icon-line-size);
+  transform-origin: center;
+}
+
+.menu.open button::before {
+  border-bottom: none;
+  transform: rotate(45deg);
+}
+
+.menu.open button::after {
+  transform: rotate(-45deg);
+}
+
+@media (orientation: landscape) {
+  .menu.open {
+    width: 200vw;
+    height: 200vw;
+    top: -50vw;
+    right: -50vw;
+  }
+}
+
+@media (orientation: portrait) {
+  .menu.open {
+    width: 200vh;
+    height: 200vh;
+    top: -50vh;
+    right: -50vh;
+  }
+}
+
+.menu nav {
+  @apply fixed inset-0;
+  @apply flex flex-col items-center justify-center;
+  animation: disappear 0.2s forwards normal;
+}
+
+.menu.open nav {
+  animation: appear 0.2s forwards;
+}
+
+.menu nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  @apply text-2xl;
+}
+
+.menu nav li,
+.menu nav h2 {
+  @apply p-1;
+}
+
+.menu nav li:last-child {
+  @apply mt-4;
+}
+
+.menu nav li a {
+  @apply underline;
+}
