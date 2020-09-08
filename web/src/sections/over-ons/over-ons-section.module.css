@@ -8,7 +8,6 @@
   grid-template-rows: min-content 1fr;
 
   @screen md {
-    @apply relative;
     @apply mx-auto;
     @apply justify-items-center;
 

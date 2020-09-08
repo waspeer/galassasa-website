@@ -1,3 +1,5 @@
+import type { ReactNode } from 'react';
+
 type CustomRuleContext<
   P extends Record<string, any> = Record<string, any>,
   D extends Record<string, any> = Record<string, any>
@@ -81,7 +83,7 @@ export interface DataType {
   /**
    * To return icon showed in menus and toolbar
    */
-  icon?: React.ReactNode;
+  icon?: ReactNode;
 
   /**
    * The field name. This will be the key in the data record.

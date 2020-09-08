@@ -8,11 +8,6 @@
   "license": "UNLICENSED",
   "scripts": {
     "build": "sanity build",
-    "code:check:rules": "eslint --print-config .eslintrc.js | eslint-config-prettier-check",
-    "code:check": "yarn code:lint; yarn code:format --check",
-    "code:clean": "yarn code:lint --fix; yarn code:format --write",
-    "code:format": "prettier './src/**/**.{js,jsx,ts,tsx}'",
-    "code:lint": "eslint --ext .js,.jsx,.ts,.tsx \"src/\"",
     "dev": "sanity start",
     "test": "sanity check"
   },
@@ -20,21 +15,20 @@
     "sanity"
   ],
   "dependencies": {
-    "@sanity/base": "^1.150.5",
-    "@sanity/cli": "^1.150.1",
-    "@sanity/components": "^1.150.5",
-    "@sanity/core": "^1.150.3",
-    "@sanity/default-layout": "^1.150.5",
+    "@sanity/base": "^1.150.7",
+    "@sanity/cli": "^1.150.7",
+    "@sanity/components": "^1.150.7",
+    "@sanity/core": "^1.150.7",
+    "@sanity/default-layout": "^1.150.7",
     "@sanity/default-login": "^1.150.1",
-    "@sanity/desk-tool": "^1.150.5",
-    "@sanity/vision": "^1.150.1",
+    "@sanity/desk-tool": "^1.150.7",
+    "@sanity/vision": "^1.150.6",
     "prop-types": "^15.7",
     "react": "^16.13",
     "react-dom": "^16.13",
-    "react-icons": "^3.10.0"
+    "react-icons": "^3.11.0"
   },
   "devDependencies": {
-    "@types/react": "^16.9.43",
-    "poetic": "^1.5.0"
+    "@types/react": "^16.9.49"
   }
 }

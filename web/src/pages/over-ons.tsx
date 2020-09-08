@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { OverOnsSection } from '../sections/over-ons';
 
 const OverOns = () => {

@@ -6,6 +6,11 @@
   "author": "Wannes Salomé <mail@wannessalome.nl>",
   "license": "MIT",
   "scripts": {
+    "code:check:rules": "eslint --print-config .eslintrc.js | eslint-config-prettier-check",
+    "code:check": "yarn code:lint; yarn code:format --check",
+    "code:clean": "yarn code:lint --fix; yarn code:format --write",
+    "code:format": "prettier '{sanity,web}/**/*.{js,jsx,ts,tsx}'",
+    "code:lint": "eslint --ext .js,.jsx,.ts,.tsx \"web/\" \"sanity/\"",
     "dev": "run-p dev:* -l",
     "dev:sanity": "yarn workspace sanity dev",
     "dev:web": "yarn workspace web dev"
@@ -17,6 +22,6 @@
   ],
   "devDependencies": {
     "npm-run-all": "^4.1.5",
-    "poetic": "^1.5.0"
+    "poetic": "^1.6.0"
   }
 }

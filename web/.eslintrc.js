@@ -2,6 +2,7 @@ module.exports = {
   extends: ['../node_modules/poetic/config/eslint/eslint-config.js'],
   rules: {
     '@typescript-eslint/explicit-function-return-type': 'off',
+    '@typescript-eslint/explicit-module-boundary-types': 'off',
     '@typescript-eslint/no-explicit-any': 'off',
     '@typescript-eslint/no-non-null-assertion': 'off',
     'import/extensions': 'off',
@@ -11,14 +12,7 @@ module.exports = {
       'error',
       {
         alphabetize: {},
-        groups: [
-          'builtin',
-          'external',
-          'internal',
-          'parent',
-          'sibling',
-          'index',
-        ],
+        groups: ['builtin', 'external', 'internal', 'parent', 'sibling', 'index'],
         'newlines-between': 'always',
         pathGroups: [{ pattern: '~/**', group: 'internal' }],
       },

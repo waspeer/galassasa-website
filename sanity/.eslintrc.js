@@ -2,6 +2,7 @@ module.exports = {
   extends: ['../node_modules/poetic/config/eslint/eslint-config.js'],
   rules: {
     '@typescript-eslint/explicit-function-return-type': 'off',
+    '@typescript-eslint/explicit-module-boundary-types': 'off',
     '@typescript-eslint/no-explicit-any': 'off',
     '@typescript-eslint/no-non-null-assertion': 'off',
     'import/no-duplicates': 'off',

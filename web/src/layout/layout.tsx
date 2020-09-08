@@ -1,3 +1,4 @@
+/* eslint-disable no-use-before-define */
 import classnames from '@sindresorhus/class-names';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -24,8 +25,8 @@ export const Layout = ({ children }: LayoutProps) => {
 
   return (
     <>
-      <Menu forceOpen={pathname === '/'} />
       {children}
+      <Menu forceOpen={pathname === '/'} />
     </>
   );
 };
@@ -62,12 +63,12 @@ function Menu({ forceOpen = false }: MenuProps) {
         aria-expanded={opened}
         aria-label={`${opened ? 'hide' : 'show'} menu`}
         className={classnames(forceOpen && s.hidden)}
-        id='main-menu-button'
+        id="main-menu-button"
         onClick={toggleMenu}
-        type='button'
+        type="button"
       />
-      <nav aria-labelledby='main-menu-button'>
-        <img alt='Galassasa Logo' className={s.logo} src='/images/logo.gif' />
+      <nav aria-labelledby="main-menu-button">
+        <img alt="Galassasa Logo" className={s.logo} src="/images/logo.gif" />
 
         <ul>
           {MENU_ITEMS.map(([name, href]) => (
@@ -81,10 +82,10 @@ function Menu({ forceOpen = false }: MenuProps) {
           ))}
 
           <li>
-            <a href='mailto:studio@galassasa.com'>contact</a>
+            <a href="mailto:studio@galassasa.com">contact</a>
           </li>
 
-          <li aria-hidden='true'>☼</li>
+          <li aria-hidden="true">☼</li>
         </ul>
       </nav>
     </div>

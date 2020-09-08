@@ -1,3 +1,5 @@
+import type { ReactNode } from 'react';
+
 import type { DataType, Validator, ValidatorFunction } from './common';
 import type { Field } from './field';
 
@@ -70,7 +72,7 @@ export interface ObjectType<T extends string = ''> extends DataType {
     /**
      * Custom preview component
      */
-    component?: React.ReactNode;
+    component?: ReactNode;
 
     /**
      * The selected fields for the preview
@@ -79,7 +81,7 @@ export interface ObjectType<T extends string = ''> extends DataType {
       /**
        * The field that should be used as the thumbnail
        */
-      media?: React.ReactNode;
+      media?: ReactNode;
 
       /**
        * The field that should be used as the subtitle
@@ -105,7 +107,7 @@ export interface ObjectType<T extends string = ''> extends DataType {
       title: any;
       [key: string]: any;
     }): {
-      media?: React.ReactNode;
+      media?: ReactNode;
       subtitle?: string;
       title: string;
     };

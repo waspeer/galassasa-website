@@ -1,11 +1,13 @@
+import type { ReactNode } from 'react';
+
 import type { DataType, Validator, ValidatorFunction } from './common';
 import type { Field } from './field';
 
 export type BlockValidator = Validator<BlockValidator>;
 
 interface BlockEditorProps {
-  icon?: (() => React.ReactNode) | React.ReactNode;
-  render?: React.ReactNode;
+  icon?: (() => ReactNode) | ReactNode;
+  render?: ReactNode;
 }
 
 export interface BlockType<T extends string = ''> extends DataType {

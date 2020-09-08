@@ -1,4 +1,3 @@
-import React from 'react';
 import Link from 'next/link';
 
 import s from './over-ons-section.module.css';
@@ -32,8 +31,8 @@ export const OverOnsSection = () => {
       </nav>
 
       <div className={s.content}>
-        Studio Galassasa is een samenwerking tussen deze vier muzikanten. Klik
-        op een naam om meer te weten te komen.
+        Studio Galassasa is een samenwerking tussen deze vier muzikanten. Klik op een naam om meer
+        te weten te komen.
       </div>
     </main>
   );
