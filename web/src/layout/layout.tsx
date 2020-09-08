@@ -23,10 +23,10 @@ export const Layout = ({ children }: LayoutProps) => {
   const { pathname } = useRouter();
 
   return (
-    <div>
+    <>
       <Menu forceOpen={pathname === '/'} />
       {children}
-    </div>
+    </>
   );
 };
 

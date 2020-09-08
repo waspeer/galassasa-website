@@ -1,7 +1,9 @@
 import React from 'react';
 
+import { OverOnsSection } from '../sections/over-ons';
+
 const OverOns = () => {
-  return <div>asdasdas</div>;
+  return <OverOnsSection />;
 };
 
 export default OverOns;

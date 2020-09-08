@@ -31,6 +31,7 @@
 }
 
 .logo {
+  width: 100%;
   max-width: 450px;
   @apply mb-8;
 }
@@ -129,6 +130,7 @@
   @apply fixed inset-0;
   @apply flex flex-col items-center justify-center;
   animation: disappear 0.2s forwards normal;
+  will-change: transform;
 }
 
 .menu.open nav {
