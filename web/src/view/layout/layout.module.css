@@ -85,7 +85,10 @@
 }
 
 .menu button::before {
-  height: calc((var(--menu-icon-size) / 2) + (var(--menu-icon-line-size) / 2));
+  --menu-icon-size-half: calc(var(--menu-icon-size) / 2);
+  --menu-icon-line-size-half: calc(var(--menu-icon-line-size) / 2);
+
+  height: calc(var(--menu-icon-size-half) + var(--menu-icon-line-size-half));
 }
 
 .menu button::after {
