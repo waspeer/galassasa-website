@@ -37,7 +37,7 @@ export const SocialLink: ObjectType = {
 
           if (urlType === 'facebook') {
             return (
-              /\/\/(?:www\.)?facebook/.test(url) ||
+              /\/\/(?:www\.)?(?:[^.]+\.)?facebook/.test(url) ||
               'Enter a valid facebook URL, or change the URL type'
             );
           }

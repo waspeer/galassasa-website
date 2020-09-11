@@ -1,10 +1,13 @@
 import sanityClient from '@sanity/client';
 import sanityImage from '@sanity/image-url';
-import type { SanityImageSource } from '@sanity/image-url/lib/types/types';
+import type { SanityImageSource, SanityImageObject } from '@sanity/image-url/lib/types/types';
+import { OpenGraphImages as OpenGraphImage } from 'next-seo/lib/types';
 
 import type { Person, Persons, StudioInfo } from '../types';
 
 const NODE_ENV = process.env.NODE_ENV || 'development';
+const OPENGRAPH_IMAGE_WIDTH = 1200;
+const OPENGRAPH_IMAGE_HEIGHT = 630;
 
 const sanityOptions = {
   dataset: process.env.NEXT_PUBLIC_SANITY_DATASET!,
@@ -48,6 +51,28 @@ export async function getPersons(): Promise<Persons> {
   }, {} as Persons);
 }
 
+export async function getPersonOpenGraphImage(personId: string): Promise<OpenGraphImage> {
+  const { firstName, lastName, photo } = await client.fetch<Person>(
+    /* groq */ `
+    *[_type == "person" && _id == $personId] {
+      firstName,
+      lastName,
+      photo
+    }[0]
+  `,
+    { personId },
+  );
+
+  const url = imageUrlFor(photo).width(OPENGRAPH_IMAGE_WIDTH).height(OPENGRAPH_IMAGE_HEIGHT).url()!;
+
+  return {
+    url,
+    width: OPENGRAPH_IMAGE_WIDTH,
+    height: OPENGRAPH_IMAGE_HEIGHT,
+    alt: `${firstName} ${lastName}`,
+  };
+}
+
 export async function getStudioInfo(): Promise<StudioInfo> {
   return client.fetch(/* groq */ `
     *[_type == "studio" && _id == "galassasa"] {
@@ -58,4 +83,23 @@ export async function getStudioInfo(): Promise<StudioInfo> {
       shortDescription
     }[0]
   `);
+}
+
+export async function getStudioOpenGraphImage(): Promise<OpenGraphImage> {
+  const { photos } = await client.fetch<{ photos: SanityImageObject[] }>(/* groq */ `
+    *[_type == "studio" && _id == "galassasa"] {
+      photos
+    }[0]
+  `);
+  const url = imageUrlFor(photos[0])
+    .width(OPENGRAPH_IMAGE_WIDTH)
+    .height(OPENGRAPH_IMAGE_HEIGHT)
+    .url()!;
+
+  return {
+    url,
+    width: OPENGRAPH_IMAGE_WIDTH,
+    height: OPENGRAPH_IMAGE_HEIGHT,
+    alt: 'Studio Galassasa',
+  };
 }

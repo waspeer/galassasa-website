@@ -1,4 +1,8 @@
 import type { SanityImageObject } from '@sanity/image-url/lib/types/types';
+import type {
+  OpenGraphImages as OpenGraphImage,
+  OpenGraph as OpenGraphInfo,
+} from 'next-seo/lib/types';
 
 export type PersonId = 'joost' | 'ruben' | 'silvan' | 'wannes';
 
@@ -36,5 +40,16 @@ export interface StudioInfo {
   email: string;
   instagram: string;
   name: string;
-  shortDescription: any[];
+  shortDescription: string;
+}
+
+export interface SeoProps {
+  description: string;
+  openGraphInfo?: OpenGraphInfo;
+  openGraphImage: OpenGraphImage;
+  title: string;
+}
+
+export interface WithSeo {
+  seo: SeoProps;
 }

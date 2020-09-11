@@ -46,3 +46,27 @@ export function addPossession(noun: string) {
 
   return `${noun}${lastCharacter === 's' ? "'" : "'s"}`;
 }
+
+/**
+ * PORTABLE TEXT TO PLAIN TEXT
+ *
+ * Convert Sanity portable text to plain text
+ */
+
+interface PortableTextBlock {
+  _type: string;
+  children: {
+    text: string;
+  }[];
+}
+
+export function portableToPlainText(blocks: PortableTextBlock[]) {
+  return blocks
+    .map((block) => {
+      if (block._type !== 'block' || !block.children) {
+        return '';
+      }
+      return block.children.map((child) => child.text).join('');
+    })
+    .join(' ');
+}

@@ -1,9 +1,10 @@
-import { OverDeStudioSection } from 'view/sections/over-de-studio';
 import type { GetStaticProps } from 'next';
-import type { StudioInfo } from 'model/types';
-import { getStudioInfo } from 'model/sanity/sanity-client';
 
-interface Props {
+import { getStudioInfo, getStudioOpenGraphImage } from '../model/sanity/sanity-client';
+import type { StudioInfo, WithSeo } from '../model/types';
+import { OverDeStudioSection } from '../view/sections/over-de-studio';
+
+interface Props extends WithSeo {
   studioInfo: StudioInfo;
 }
 
@@ -13,9 +14,17 @@ const OverDeStudio = ({ studioInfo }: Props) => {
 
 export const getStaticProps: GetStaticProps<Props> = async () => {
   const studioInfo = await getStudioInfo();
+  const openGraphImage = await getStudioOpenGraphImage();
 
   return {
-    props: { studioInfo },
+    props: {
+      seo: {
+        description: studioInfo.shortDescription,
+        openGraphImage,
+        title: 'Over de Studio',
+      },
+      studioInfo,
+    },
   };
 };
 

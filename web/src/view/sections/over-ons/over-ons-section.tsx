@@ -1,13 +1,13 @@
 import BlockContent from '@sanity/block-content-to-react';
 import classNames from '@sindresorhus/class-names';
-import { imageUrlFor } from 'model/sanity/sanity-client';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFacebook, faInstagram } from '@fortawesome/free-brands-svg-icons';
 import { faGlobeEurope, faExternalLinkAlt } from '@fortawesome/free-solid-svg-icons';
-import { renderAsNaturalList, addPossession } from 'lib/utils';
 
+import { imageUrlFor } from '../../../model/sanity/sanity-client';
+import { renderAsNaturalList, addPossession } from '../../../lib/utils';
 import type { Person, PersonId, Persons, PersonSocialLink } from '../../../model/types';
 
 import s from './over-ons-section.module.css';

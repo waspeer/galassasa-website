@@ -1,8 +1,8 @@
 import { SanityImageObject } from '@sanity/image-url/lib/types/types';
-import { imageUrlFor } from 'model/sanity/sanity-client';
 import classNames from '@sindresorhus/class-names';
 import BlockContent from '@sanity/block-content-to-react';
 
+import { imageUrlFor } from '../../../model/sanity/sanity-client';
 import type { StudioInfo } from '../../../model/types';
 
 import s from './over-de-studio-section.module.css';
@@ -21,7 +21,7 @@ export const OverDeStudioSection = ({ studioInfo }: Props) => {
       <div className={s.shortDescription}>{studioInfo.shortDescription}</div>
 
       {studioInfo.description.map(({ image, text, title }) => (
-        <TextBlockWithImage image={image} text={text} title={title} />
+        <TextBlockWithImage image={image} key={title} text={text} title={title} />
       ))}
 
       <dl className={s.contact}>
