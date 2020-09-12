@@ -22,6 +22,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         openGraph={{
           description,
           images: [openGraphImage],
+          locale: 'nl_NL',
           url: new URL(asPath, BASE_URL).toString(),
           site_name: 'Studio Galassasa',
           title,
