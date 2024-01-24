@@ -8,12 +8,17 @@ import { Menu } from './menu';
 ---
 
 <script>
-  import listen from 'micromorph/nav';
+  import enableSpaNavigation from 'micromorph/spa';
+  import { dispatchClientNavigationEvent } from '../lib/client-navigation-event';
 
-  listen();
+  enableSpaNavigation({
+    beforeDiff() {
+      dispatchClientNavigationEvent(window.location);
+    },
+  });
 </script>
 
-<html lang="en" transition:animate="none">
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -22,9 +27,7 @@ import { Menu } from './menu';
     <title>Astro</title>
   </head>
   <body>
-    <div class="content-slot">
-      <slot />
-    </div>
+    <slot />
     <Menu initialPathname={Astro.url.pathname} client:load />
   </body>
 </html>

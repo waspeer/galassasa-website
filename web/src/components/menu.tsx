@@ -1,7 +1,9 @@
 import classnames from '@sindresorhus/class-names';
 import { createMediaQuery } from '@solid-primitives/media';
+
 import { For, createEffect, createMemo, createSignal, onMount } from 'solid-js';
 
+import { addClientNavigationEventListener } from '../lib/client-navigation-event';
 import s from './menu.module.css';
 
 interface MenuProps {
@@ -43,13 +45,10 @@ export function Menu(props: MenuProps) {
   let isInitialRender = true;
 
   onMount(() => {
-    if ('navigation' in window) {
-      (window.navigation as any).addEventListener('navigate', (event) => {
-        const destination = new URL(event.destination.url);
-        setForceOpen(destination.pathname === '/');
-        setPreferOpened(false);
-      });
-    }
+    addClientNavigationEventListener((event) => {
+      setForceOpen(event.detail.pathname === '/');
+      setPreferOpened(false);
+    });
   });
 
   createEffect(() => {
