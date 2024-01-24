@@ -1,0 +1,30 @@
+---
+import '@fontsource/roboto/400.css';
+import '@fontsource/roboto/700.css';
+import 'destyle.css';
+import '../styles/global.css';
+
+import { Menu } from './menu';
+---
+
+<script>
+  import listen from 'micromorph/nav';
+
+  listen();
+</script>
+
+<html lang="en" transition:animate="none">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>Astro</title>
+  </head>
+  <body>
+    <div class="content-slot">
+      <slot />
+    </div>
+    <Menu initialPathname={Astro.url.pathname} client:load />
+  </body>
+</html>

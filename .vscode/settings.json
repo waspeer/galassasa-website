@@ -1,0 +1,8 @@
+{
+  "cssvar.files": [
+    "./web/node_modules/open-props/open-props.min.css",
+    "./web/src/styles/global.css"
+  ],
+  "cssvar.ignore": [],
+  "cssvar.extensions": ["css", "postcss", "jsx", "tsx", "astro"]
+}

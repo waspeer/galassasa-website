@@ -1,0 +1,11 @@
+---
+import Layout from '../components/layout.astro';
+import { getStudioInfo } from '../lib/sanity';
+import OverDeStudioSection from '../sections/over-de-studio.astro';
+
+const studioInfo = await getStudioInfo();
+---
+
+<Layout>
+  <OverDeStudioSection studioInfo={studioInfo} />
+</Layout>

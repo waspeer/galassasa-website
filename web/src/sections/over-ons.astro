@@ -1,0 +1,113 @@
+---
+import { toHTML } from '@portabletext/to-html';
+import classNames from '@sindresorhus/class-names';
+import { Icon } from 'astro-icon/components';
+import { imageUrlFor } from '../lib/sanity';
+import type { Persons } from '../lib/types';
+import s from './over-ons.module.css';
+
+interface Props {
+  persons: Persons;
+  selectedPersonId?: keyof Persons;
+}
+
+const { persons, selectedPersonId } = Astro.props;
+
+const selectedPerson = selectedPersonId && persons[selectedPersonId];
+
+const photoUrlSmall =
+  selectedPerson && imageUrlFor(selectedPerson.photo).width(300).height(225).url()!;
+
+const photoUrlLarge =
+  selectedPerson && imageUrlFor(selectedPerson.photo).width(700).height(250).url()!;
+
+function createPersonUrl(path: string) {
+  return `/over-ons/${path}`;
+}
+---
+
+<main class={s.wrapper}>
+  <h1>Over Ons</h1>
+
+  <nav>
+    <ul>
+      {
+        Object.values(persons).map(({ id, firstName }) => {
+          const url = createPersonUrl(id);
+
+          return (
+            <li class={classNames(selectedPersonId === id && s.active)}>
+              <a href={url}>{firstName}</a>
+            </li>
+          );
+        })
+      }
+    </ul>
+  </nav>
+
+  <div class={s.content}>
+    {
+      !selectedPerson &&
+        'Studio Galassasa is een samenwerking tussen deze vier muzikanten. Klik op een naam om meer te weten te komen.'
+    }
+
+    {
+      selectedPerson && (
+        <div class={s.details}>
+          <img
+            alt={`${selectedPerson.firstName} ${selectedPerson.lastName}`}
+            class={s.small}
+            src={photoUrlSmall}
+            width="300"
+            height="225"
+          />
+          <img
+            alt={`${selectedPerson.firstName} ${selectedPerson.lastName}`}
+            class={s.large}
+            src={photoUrlLarge}
+            width="700"
+            height="250"
+          />
+
+          {selectedPerson.socialLinks && (
+            <ul class={s.socialLinks}>
+              {selectedPerson.socialLinks.map(({ url, type }) => (
+                <li>
+                  <a aria-label={type} href={url}>
+                    {type === 'facebook' && <Icon name="fa-brands:facebook" />}
+                    {type === 'instagram' && <Icon name="fa-brands:instagram" />}
+                    {type === 'other' && <Icon name="fa-solid:globe-europe" />}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          )}
+
+          <div class={s.detailsContent}>
+            <Fragment set:html={toHTML(selectedPerson.bio)} />
+
+            {selectedPerson.projectLinks && (
+              <>
+                <h2>Projecten</h2>
+                {selectedPerson.projectLinks.flatMap(({ name, url }, index, list) => [
+                  list.length !== 1 && index === list.length - 1 && ` en `,
+                  <a href={url}>{name}</a>,
+                  index < list.length - 2 && ', ',
+                ])}
+              </>
+            )}
+
+            {selectedPerson.portfolioLink && (
+              <a class={s.portfolioLink} href={selectedPerson.portfolioLink}>
+                Beluister{' '}
+                {selectedPerson.firstName +
+                  `${selectedPerson.firstName.at(-1) === 's' ? "'" : "'s"}`}{' '}
+                portfolio <Icon name="fa-solid:external-link-alt" />
+              </a>
+            )}
+          </div>
+        </div>
+      )
+    }
+  </div>
+</main>

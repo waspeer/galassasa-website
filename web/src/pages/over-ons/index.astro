@@ -1,0 +1,11 @@
+---
+import Layout from '../../components/layout.astro';
+import { getPersons } from '../../lib/sanity';
+import OverOnsSection from '../../sections/over-ons.astro';
+
+const persons = await getPersons();
+---
+
+<Layout>
+  <OverOnsSection persons={persons} />
+</Layout>

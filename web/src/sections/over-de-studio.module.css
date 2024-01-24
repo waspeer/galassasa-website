@@ -1,0 +1,203 @@
+@custom-media --screen-md (min-width: 768px);
+
+.wrapper {
+  margin-inline: var(--size-4);
+
+  @media (--screen-md) {
+    margin-inline: auto;
+    max-width: 42rem;
+  }
+
+  & h1 {
+    position: relative;
+    border-bottom: 1px solid var(--gray-12);
+    padding-block: var(--size-8);
+    font-weight: var(--font-weight-bold);
+    font-size: var(--font-size-4);
+    line-height: var(--font-lineheight-2);
+    text-align: left;
+    text-transform: uppercase;
+
+    @media (--screen-md) {
+      margin-inline: 0;
+      padding: var(--size-9) var(--size-5) var(--size-5);
+      font-size: var(--font-size-5);
+      line-height: var(--font-lineheight-1);
+      text-align: center;
+    }
+  }
+
+  & .shortDescription {
+    border-bottom: 1px solid var(--gray-12);
+    padding-block: var(--size-4);
+    font-size: var(--font-size-4);
+    line-height: var(--font-lineheight-0);
+
+    @media (--screen-md) {
+      margin-inline: 0;
+      padding-block: var(--size-5);
+      font-size: var(--font-size-5);
+      line-height: var(--font-lineheight-0);
+    }
+  }
+
+  & .textBlock {
+    margin-top: var(--size-8);
+    font-size: var(--font-size-2);
+    line-height: var(--font-lineheight-0);
+
+    @media (--screen-md) {
+      display: grid;
+      position: relative;
+      margin-inline: calc(-1 * var(--size-7));
+
+      &:nth-child(odd) {
+        left: -2rem;
+        grid-template-columns: 130px 1fr;
+
+        & .text {
+          padding-left: var(--size-8);
+
+          &::before {
+            left: var(--size-5);
+          }
+        }
+      }
+
+      &:nth-child(even) {
+        right: calc(-1 * var(--size-7));
+        grid-template-columns: 1fr 130px;
+
+        & .image {
+          grid-column: 2 / -1;
+        }
+
+        & .text {
+          grid-row: 2;
+          padding-right: var(--size-8);
+
+          &::before {
+            right: var(--size-5);
+          }
+        }
+      }
+    }
+
+    & h2 {
+      grid-row: 1;
+      grid-column: 1 / -1;
+      margin-bottom: var(--size-3);
+      font-weight: var(--font-weight-bold);
+      text-align: center;
+      text-decoration: underline;
+      text-transform: uppercase;
+
+      @media (--screen-md) {
+        margin-bottom: var(--size-5);
+      }
+    }
+
+    & p:not(:last-child) {
+      @apply mb-3;
+      margin-bottom: var(--size-3);
+
+      @media (--screen-md) {
+        margin-bottom: var(--size-5);
+      }
+    }
+
+    & .image {
+      margin-bottom: var(--size-8);
+      background-position: center;
+      background-size: cover;
+
+      &.landscape {
+        height: var(--size-10);
+      }
+
+      &.portrait {
+        display: none;
+      }
+
+      @media (--screen-md) {
+        &.landscape {
+          display: none;
+        }
+
+        &.portrait {
+          display: block;
+          height: 100%;
+        }
+      }
+    }
+
+    &:nth-child(odd) .image {
+      box-shadow: 4px 4px 0px var(--color-neutral);
+    }
+
+    &:nth-child(even) .image {
+      box-shadow: -4px 4px 0px var(--color-neutral);
+    }
+
+    & .text {
+      @media (--screen-md) {
+        position: relative;
+
+        &::before {
+          position: absolute;
+          border-left: 4px solid var(--gray-12);
+          height: 100%;
+          content: '';
+        }
+      }
+    }
+  }
+
+  & .contact {
+    margin-top: var(--size-8);
+    border-top: 1px solid var(--gray-12);
+    padding-block: var(--size-5);
+
+    @media (--screen-md) {
+      display: grid;
+      grid-template-columns: min-content min-content;
+      justify-content: center;
+      align-items: end;
+      padding-bottom: var(--size-10);
+      line-height: 0;
+    }
+
+    & dt {
+      font-weight: var(--font-weight-normal);
+      font-size: var(--font-size-1);
+      line-height: var(--font-lineheight-3);
+      text-transform: uppercase;
+
+      @media (--screen-md) {
+        margin-right: var(--size-3);
+        padding-bottom: var(--size-1);
+        font-size: var(--font-size-2);
+        text-align: right;
+      }
+    }
+
+    & dd {
+      font-weight: var(--font-weight-bold);
+      font-size: var(--font-size-4);
+      line-height: var(--font-lineheight-2);
+
+      &:not(:last-child) {
+        margin-bottom: var(--size-5);
+      }
+
+      @media (--screen-md) {
+        font-size: var(--font-size-5);
+        line-height: var(--font-lineheight-1);
+
+        &:not(:last-child) {
+          margin-bottom: 0;
+        }
+      }
+    }
+  }
+}

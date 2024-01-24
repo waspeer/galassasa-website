@@ -1,0 +1,27 @@
+:root {
+  --color-primary: #d2539f;
+  --color-secondary: #dbcbd8;
+  --color-neutral: #f2fdff;
+
+  --font-weight-normal: 400;
+  --font-weight-bold: 700;
+}
+
+html,
+body {
+  background: var(--color-secondary);
+  font-size: var(--font-size-1);
+  line-height: var(--font-lineheight-3);
+  font-family:
+    Roboto,
+    -apple-system,
+    BlinkMacSystemFont,
+    Segoe UI,
+    Oxygen,
+    Ubuntu,
+    Cantarell,
+    Fira Sans,
+    Droid Sans,
+    Helvetica Neue,
+    sans-serif;
+}
