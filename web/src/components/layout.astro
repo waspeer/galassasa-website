@@ -4,7 +4,22 @@ import '@fontsource/roboto/700.css';
 import 'destyle.css';
 import '../styles/global.css';
 
+import type { Props as SEOProps } from 'astro-seo';
+import { SEO } from 'astro-seo';
+import type { PartialDeep } from 'type-fest';
 import { Menu } from './menu';
+
+interface Props {
+  seo: {
+    description: string;
+    openGraphInfo?: PartialDeep<NonNullable<SEOProps['openGraph']>>;
+    openGraphImage: NonNullable<NonNullable<SEOProps['openGraph']>['image']>;
+    title: string;
+  };
+}
+
+const { seo } = Astro.props;
+const { description, openGraphImage, openGraphInfo, title } = seo;
 ---
 
 <script>
@@ -24,7 +39,29 @@ import { Menu } from './menu';
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
-    <title>Astro</title>
+
+    <SEO
+      description={description}
+      title={title}
+      titleTemplate="%s <> Galassasa"
+      openGraph={{
+        basic: {
+          title,
+          type: 'website',
+          ...openGraphInfo?.basic,
+          image: openGraphImage.url!.toString(),
+          url: Astro.url.href,
+        },
+        optional: {
+          description,
+          locale: 'nl_NL',
+          siteName: 'Studio Galassasa',
+          ...openGraphInfo?.optional,
+        },
+        image: openGraphImage,
+      }}
+    />
+    <slot name="head" />
   </head>
   <body>
     <slot />

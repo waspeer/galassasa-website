@@ -1,11 +1,21 @@
 ---
 import Layout from '../../components/layout.astro';
-import { getPersons } from '../../lib/sanity';
+import { getPersons, getStudioInfo, getStudioOpenGraphImage } from '../../lib/sanity';
 import OverOnsSection from '../../sections/over-ons.astro';
 
-const persons = await getPersons();
+const [openGraphImage, studioInfo, persons] = await Promise.all([
+  getStudioOpenGraphImage(),
+  getStudioInfo(),
+  getPersons(),
+]);
 ---
 
-<Layout>
+<Layout
+  seo={{
+    description: studioInfo.shortDescription,
+    openGraphImage,
+    title: 'Over Ons',
+  }}
+>
   <OverOnsSection persons={persons} />
 </Layout>

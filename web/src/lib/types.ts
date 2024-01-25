@@ -39,13 +39,9 @@ export interface StudioInfo {
   shortDescription: string;
 }
 
-export interface SeoProps {
-  description: string;
-  openGraphInfo?: OpenGraphInfo;
-  openGraphImage: OpenGraphImage;
-  title: string;
-}
-
-export interface WithSeo {
-  seo: SeoProps;
+export interface OpenGraphImage {
+  url: string;
+  width: number;
+  height: number;
+  alt: string;
 }

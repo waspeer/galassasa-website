@@ -1,11 +1,20 @@
 ---
 import Layout from '../components/layout.astro';
-import { getStudioInfo } from '../lib/sanity';
+import { getStudioInfo, getStudioOpenGraphImage } from '../lib/sanity';
 import OverDeStudioSection from '../sections/over-de-studio.astro';
 
-const studioInfo = await getStudioInfo();
+const [studioInfo, openGraphImage] = await Promise.all([
+  getStudioInfo(),
+  getStudioOpenGraphImage(),
+]);
 ---
 
-<Layout>
+<Layout
+  seo={{
+    description: studioInfo.shortDescription,
+    openGraphImage,
+    title: 'Over de Studio',
+  }}
+>
   <OverDeStudioSection studioInfo={studioInfo} />
 </Layout>

@@ -2,7 +2,7 @@ import createSanityImageUrlBuilder from '@sanity/image-url';
 import type { SanityImageObject, SanityImageSource } from '@sanity/image-url/lib/types/types';
 import createSanityClient from 'picosanity';
 import { env } from './env';
-import type { Person, Persons, StudioInfo } from './types';
+import type { OpenGraphImage, Person, Persons, StudioInfo } from './types';
 
 const OPENGRAPH_IMAGE_WIDTH = 1200;
 const OPENGRAPH_IMAGE_HEIGHT = 630;

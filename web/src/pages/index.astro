@@ -1,5 +1,17 @@
 ---
 import Layout from '../components/layout.astro';
+import { getStudioInfo, getStudioOpenGraphImage } from '../lib/sanity';
+
+const [openGraphImage, studioInfo] = await Promise.all([
+  getStudioOpenGraphImage(),
+  getStudioInfo(),
+]);
 ---
 
-<Layout />
+<Layout
+  seo={{
+    description: studioInfo.shortDescription,
+    openGraphImage,
+    title: 'Studio',
+  }}
+/>

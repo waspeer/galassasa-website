@@ -6,4 +6,7 @@
   "env": {
     "browser": true,
   },
+  "rules": {
+    "import/no-unresolved": "off",
+  },
 }
