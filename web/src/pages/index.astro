@@ -1,11 +1,10 @@
 ---
 import Layout from '../components/layout.astro';
-import { getStudioInfo, getStudioOpenGraphImage } from '../lib/sanity';
+import { cache, getStudioInfo, getStudioOpenGraphImage } from '../lib/sanity';
 
-const [openGraphImage, studioInfo] = await Promise.all([
-  getStudioOpenGraphImage(),
-  getStudioInfo(),
-]);
+const [openGraphImage, studioInfo] = await cache('index', () =>
+  Promise.all([getStudioOpenGraphImage(), getStudioInfo()]),
+);
 ---
 
 <Layout

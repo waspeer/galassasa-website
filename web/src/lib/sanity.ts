@@ -1,20 +1,62 @@
 import createSanityImageUrlBuilder from '@sanity/image-url';
 import type { SanityImageObject, SanityImageSource } from '@sanity/image-url/lib/types/types';
-import createSanityClient from 'picosanity';
+import createSanityClient, { type ClientConfig } from 'picosanity';
 import { env } from './env';
 import type { OpenGraphImage, Person, Persons, StudioInfo } from './types';
 
 const OPENGRAPH_IMAGE_WIDTH = 1200;
 const OPENGRAPH_IMAGE_HEIGHT = 630;
 
-const sanityOptions = {
+const sanityOptions: ClientConfig = {
   dataset: env.SANITY_DATASET,
   projectId: env.SANITY_PROJECT_ID,
   useCdn: import.meta.env.PROD,
+  apiVersion: '2024-01-25',
 };
 
 const client = createSanityClient(sanityOptions);
 const imageUrlBuilder = createSanityImageUrlBuilder(sanityOptions);
+
+// Last modified date of the last fetched data
+let lastModified: string | null = null;
+let dataMap = new Map<string, any>();
+
+export async function cache<TData>(key: string, dataFunction: () => Promise<TData>) {
+  const newLastModified = await client.fetch<string | null>(
+    lastModified
+      ? /* groq */ `*[!(_type match 'system.*') && _updatedAt >= $lastModified] | order(_updatedAt desc)[0]._updatedAt`
+      : /* groq */ `*[!(_type match 'system.*')] | order(_updatedAt desc)[0]._updatedAt`,
+    { lastModified },
+    { perspective: 'published' },
+  );
+
+  if (newLastModified !== lastModified) {
+    dataMap = new Map();
+  }
+
+  if (!dataMap.has(key)) {
+    console.log('DATA: cache miss');
+    console.log('> lastModified', lastModified);
+    console.log('> newLastModified', newLastModified);
+
+    lastModified = newLastModified;
+
+    const data = dataFunction();
+    dataMap.set(key, data);
+
+    return data;
+  } else {
+    console.log('DATA: cache hit');
+
+    const data = dataMap.get(key) as TData;
+
+    if (!data) {
+      throw new Error('Data not found in cache');
+    }
+
+    return data;
+  }
+}
 
 export function imageUrlFor(source: SanityImageSource) {
   return imageUrlBuilder.image(source);

@@ -1,13 +1,11 @@
 ---
 import Layout from '../../components/layout.astro';
-import { getPersons, getStudioInfo, getStudioOpenGraphImage } from '../../lib/sanity';
+import { cache, getPersons, getStudioInfo, getStudioOpenGraphImage } from '../../lib/sanity';
 import OverOnsSection from '../../sections/over-ons.astro';
 
-const [openGraphImage, studioInfo, persons] = await Promise.all([
-  getStudioOpenGraphImage(),
-  getStudioInfo(),
-  getPersons(),
-]);
+const [openGraphImage, studioInfo, persons] = await cache('over-ons', () =>
+  Promise.all([getStudioOpenGraphImage(), getStudioInfo(), getPersons()]),
+);
 ---
 
 <Layout
