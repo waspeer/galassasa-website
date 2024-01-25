@@ -112,9 +112,7 @@ export function Menu(props: MenuProps) {
           <For each={MENU_ITEMS}>
             {([name, href]) => (
               <li>
-                <a href={href} onClick={closeMenu}>
-                  {name}
-                </a>
+                <a href={href}>{name}</a>
               </li>
             )}
           </For>
