@@ -86,6 +86,10 @@
   opacity: 0;
   will-change: transform;
   inset: 0;
+
+  &.hidden {
+    transform: scale(0.001);
+  }
 }
 
 .menu nav ul {

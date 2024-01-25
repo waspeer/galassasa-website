@@ -23,6 +23,7 @@ export function Menu(props: MenuProps) {
 
   const [forceOpen, setForceOpen] = createSignal(pathname === '/');
   const [preferOpened, setPreferOpened] = createSignal(false);
+  const [navIsAnimating, setNavIsAnimating] = createSignal(false);
 
   const opened = createMemo(() => forceOpen() || preferOpened());
 
@@ -75,9 +76,7 @@ export function Menu(props: MenuProps) {
       },
     );
 
-    if (opened()) {
-      $nav.style.transform = 'scale(1)';
-    }
+    setNavIsAnimating(true);
 
     $nav
       .animate(opened() ? { opacity: 1 } : { opacity: 0 }, {
@@ -86,8 +85,7 @@ export function Menu(props: MenuProps) {
         fill: 'forwards',
       })
       .addEventListener('finish', () => {
-        if (!$nav) return;
-        $nav.style.transform = opened() ? 'scale(1)' : 'scale(0.001)';
+        setNavIsAnimating(false);
       });
 
     isInitialRender = false;
@@ -103,7 +101,11 @@ export function Menu(props: MenuProps) {
         onClick={toggleMenu}
         type="button"
       />
-      <nav aria-labelledby="main-menu-button" ref={$nav}>
+      <nav
+        class={classnames(!navIsAnimating() && !opened() && s.hidden)}
+        aria-labelledby="main-menu-button"
+        ref={$nav}
+      >
         <img alt="Galassasa Logo" class={s.logo} src="/images/logo.gif" />
 
         <ul>
