@@ -24,10 +24,15 @@ const { description, openGraphImage, openGraphInfo, title } = seo;
 
 <script>
   import enableSpaNavigation from 'micromorph/spa';
+  import NProgress from 'nprogress';
   import { dispatchClientNavigationEvent } from '../lib/client-navigation-event';
 
   enableSpaNavigation({
     beforeDiff() {
+      NProgress.start();
+    },
+    afterDiff() {
+      NProgress.done();
       dispatchClientNavigationEvent(window.location);
     },
   });
@@ -71,5 +76,31 @@ const { description, openGraphImage, openGraphInfo, title } = seo;
   <body>
     <slot />
     <Menu initialPathname={Astro.url.pathname} client:load />
+
+    <div id="nprogress">
+      <div
+        class="bar"
+        role="bar"
+        style="transform: translate3d(-100%, 0px, 0px); transition: all 200ms ease 0s;"
+      >
+      </div>
+    </div>
+
+    <style>
+      #nprogress {
+        pointer-events: none;
+      }
+
+      #nprogress .bar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 1031;
+        background: black;
+
+        width: 100%;
+        height: 4px;
+      }
+    </style>
   </body>
 </html>

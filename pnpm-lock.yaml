@@ -114,6 +114,9 @@ importers:
       micromorph:
         specifier: ^0.4.5
         version: 0.4.5
+      nprogress:
+        specifier: ^0.2.0
+        version: 0.2.0
       open-props:
         specifier: ^1.6.17
         version: 1.6.17
@@ -139,6 +142,9 @@ importers:
       '@types/dom-navigation':
         specifier: ^1.0.3
         version: 1.0.3
+      '@types/nprogress':
+        specifier: ^0.2.3
+        version: 0.2.3
       postcss-preset-env:
         specifier: ^9.3.0
         version: 9.3.0(postcss@8.4.33)
@@ -3830,6 +3836,10 @@ packages:
   /@types/normalize-package-data@2.4.4:
     resolution: {integrity: sha512-37i+OaWTh9qeK4LSHPsyRC7NahnGotNuZvjLSgcPzblpHB3rrCJxAOgI5gCdKm7coonsaX1Of0ILiTcnZjbfxA==}
     dev: false
+
+  /@types/nprogress@0.2.3:
+    resolution: {integrity: sha512-k7kRA033QNtC+gLc4VPlfnue58CM1iQLgn1IMAU8VPHGOj7oIHPp9UlhedEnD/Gl8evoCjwkZjlBORtZ3JByUA==}
+    dev: true
 
   /@types/prop-types@15.7.11:
     resolution: {integrity: sha512-ga8y9v9uyeiLdpKddhxYQkxNDrfvuPrlFb0N1qnZZByvcElJaXthF1UhvCh9TLWJBEHeNtdnbysW7Y6Uq8CVng==}
@@ -11024,6 +11034,10 @@ packages:
     engines: {node: ^12.20.0 || ^14.13.1 || >=16.0.0}
     dependencies:
       path-key: 4.0.0
+    dev: false
+
+  /nprogress@0.2.0:
+    resolution: {integrity: sha512-I19aIingLgR1fmhftnbWWO3dXc0hSxqHQHQb3H8m+K3TnEn/iSeTZZOyvKXWqQESMwuUVnatlCnZdLBZZt2VSA==}
     dev: false
 
   /nth-check@1.0.2:
