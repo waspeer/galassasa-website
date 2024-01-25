@@ -1,0 +1,115 @@
+.logo {
+  width: 100%;
+  max-width: 450px;
+  @apply mb-8;
+}
+
+.menu {
+  --menu-closed-offset: var(--size-7);
+  --menu-closed-size: var(--size-8);
+  --menu-icon-size: calc(var(--menu-closed-size) / 3);
+  --menu-icon-line-size: calc(var(--menu-closed-size) * 0.07);
+
+  position: fixed;
+  top: var(--menu-closed-offset);
+  right: var(--menu-closed-offset);
+  box-shadow: 1px 1px black;
+  border: 1px solid var(--gray-12);
+  border-radius: 50%;
+  background-color: var(--color-neutral);
+  width: var(--menu-closed-size);
+  height: var(--menu-closed-size);
+  overflow: hidden;
+}
+
+.menu button {
+  position: fixed;
+  top: var(--menu-closed-offset);
+  right: var(--menu-closed-offset);
+  z-index: 10;
+  width: var(--menu-closed-size);
+  height: var(--menu-closed-size);
+}
+
+.menu button.hidden {
+  display: none;
+}
+
+.menu button::before,
+.menu button::after {
+  position: absolute;
+  top: calc(((var(--menu-closed-size) - var(--menu-icon-size)) / 2));
+  right: calc(((var(--menu-closed-size) - var(--menu-icon-size)) / 2));
+  transition: all 0.5s;
+  box-sizing: border-box;
+  border: var(--menu-icon-line-size) solid var(--gray-12);
+  border-right: none;
+  border-left: none;
+  border-radius: 1px;
+  width: var(--menu-icon-size);
+  content: '';
+}
+
+.menu button::before {
+  --menu-icon-size-half: calc(var(--menu-icon-size) / 2);
+  --menu-icon-line-size-half: calc(var(--menu-icon-line-size) / 2);
+
+  height: calc(var(--menu-icon-size-half) + var(--menu-icon-line-size-half));
+}
+
+.menu button::after {
+  border-top: none;
+  height: var(--menu-icon-size);
+}
+
+.menu.open button::before,
+.menu.open button::after {
+  transform-origin: center;
+  height: var(--menu-icon-line-size);
+}
+
+.menu.open button::before {
+  transform: rotate(45deg);
+  border-bottom: none;
+}
+
+.menu.open button::after {
+  transform: rotate(-45deg);
+}
+
+.menu nav {
+  display: flex;
+  position: fixed;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  will-change: transform;
+  inset: 0;
+
+  &.hidden {
+    transform: scale(0.001);
+  }
+}
+
+.menu nav ul {
+  margin: 0;
+  padding: 0;
+  font-size: var(--font-size-4);
+  line-height: var(--font-lineheight-2);
+  list-style: none;
+  text-align: center;
+}
+
+.menu nav li,
+.menu nav h2 {
+  padding: var(--size-1);
+}
+
+.menu nav li:last-child {
+  margin-top: var(--size-3);
+}
+
+.menu nav li a {
+  text-decoration: underline;
+}

@@ -1,0 +1,64 @@
+---
+import { toPlainText } from '@portabletext/toolkit';
+import type { GetStaticPaths } from 'astro';
+import Layout from '../../components/layout.astro';
+import { cache, getPersonOpenGraphImage, getPersons } from '../../lib/sanity';
+import type { Persons } from '../../lib/types';
+import OverOnsSection from '../../sections/over-ons.astro';
+
+const selectedPersonId = Astro.params.personId;
+
+const { persons, person, plainBio, openGraphImage } = await cache(
+  `over-${selectedPersonId}`,
+  async () => {
+    const [persons, openGraphImage] = await Promise.all([
+      getPersons(),
+      getPersonOpenGraphImage(selectedPersonId),
+    ]);
+
+    const person = persons[selectedPersonId];
+
+    const plainBio = toPlainText(person.bio);
+
+    return {
+      persons,
+      person,
+      plainBio,
+      openGraphImage,
+    };
+  },
+);
+
+export const getStaticPaths = (async () => {
+  const persons = await getPersons();
+
+  return Object.keys(persons).map((personId) => ({
+    params: { personId: personId as keyof Persons },
+  }));
+}) satisfies GetStaticPaths;
+---
+
+<Layout
+  seo={{
+    description: plainBio,
+    openGraphInfo: {
+      basic: {
+        type: 'profile',
+        title: `${person.firstName} ${person.lastName}`,
+      },
+      optional: {
+        description: plainBio,
+      },
+    },
+    title: `Over ${person.firstName}`,
+    openGraphImage,
+  }}
+>
+  <Fragment slot="head">
+    <meta name="profile:first_name" content={person.firstName} />
+    <meta name="profile:last_name" content={person.lastName} />
+    <meta name="profile:gender" content="male" />
+  </Fragment>
+
+  <OverOnsSection persons={persons} selectedPersonId={selectedPersonId} />
+</Layout>

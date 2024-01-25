@@ -119,3 +119,8 @@ dist
 .pnp.*
 
 snipsnap.code-snippets
+
+# generated types
+.astro/
+
+old/

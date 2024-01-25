@@ -1,0 +1,12 @@
+{
+  "extends": [
+    "./node_modules/@waspeer/config/eslint",
+    "./node_modules/@waspeer/config/eslint/solid",
+  ],
+  "env": {
+    "browser": true,
+  },
+  "rules": {
+    "import/no-unresolved": "off",
+  },
+}

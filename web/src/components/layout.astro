@@ -1,0 +1,106 @@
+---
+import '@fontsource/roboto/400.css';
+import '@fontsource/roboto/700.css';
+import 'destyle.css';
+import '../styles/global.css';
+
+import type { Props as SEOProps } from 'astro-seo';
+import { SEO } from 'astro-seo';
+import type { PartialDeep } from 'type-fest';
+import { Menu } from './menu';
+
+interface Props {
+  seo: {
+    description: string;
+    openGraphInfo?: PartialDeep<NonNullable<SEOProps['openGraph']>>;
+    openGraphImage: NonNullable<NonNullable<SEOProps['openGraph']>['image']>;
+    title: string;
+  };
+}
+
+const { seo } = Astro.props;
+const { description, openGraphImage, openGraphInfo, title } = seo;
+---
+
+<script>
+  import enableSpaNavigation from 'micromorph/spa';
+  import NProgress from 'nprogress';
+  import { dispatchClientNavigationEvent } from '../lib/client-navigation-event';
+
+  enableSpaNavigation({
+    beforeDiff() {
+      NProgress.start();
+    },
+    afterDiff() {
+      NProgress.done();
+      dispatchClientNavigationEvent(window.location);
+    },
+  });
+</script>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <link rel="icon" href="/favicon.ico" sizes="32x32" />
+    <link rel="icon" href="/icon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+
+    <SEO
+      description={description}
+      title={title}
+      titleTemplate="%s <> Galassasa"
+      openGraph={{
+        basic: {
+          title,
+          type: 'website',
+          ...openGraphInfo?.basic,
+          image: openGraphImage.url!.toString(),
+          url: Astro.url.href,
+        },
+        optional: {
+          description,
+          locale: 'nl_NL',
+          siteName: 'Studio Galassasa',
+          ...openGraphInfo?.optional,
+        },
+        image: openGraphImage,
+      }}
+    />
+    <slot name="head" />
+  </head>
+  <body>
+    <slot />
+    <Menu initialPathname={Astro.url.pathname} client:load />
+
+    <div id="nprogress">
+      <div
+        class="bar"
+        role="bar"
+        style="transform: translate3d(-100%, 0px, 0px); transition: all 200ms ease 0s;"
+      >
+      </div>
+    </div>
+
+    <style>
+      #nprogress {
+        pointer-events: none;
+      }
+
+      #nprogress .bar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 1031;
+        background: black;
+
+        width: 100%;
+        height: 4px;
+      }
+    </style>
+  </body>
+</html>
