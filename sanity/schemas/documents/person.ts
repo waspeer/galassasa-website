@@ -1,6 +1,6 @@
-import { DocumentType } from '../../lib/data-types';
+import { defineType } from 'sanity';
 
-export const Person: DocumentType<'projectLink' | 'socialLink'> = {
+export const Person = defineType({
   name: 'person',
   title: 'Persoon',
   type: 'document',
@@ -84,4 +84,4 @@ export const Person: DocumentType<'projectLink' | 'socialLink'> = {
       of: [{ type: 'socialLink' }],
     },
   ],
-};
+});

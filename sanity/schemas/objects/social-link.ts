@@ -1,14 +1,13 @@
 import { BsLink45Deg } from 'react-icons/bs';
+import { defineField, defineType } from 'sanity';
 
-import { ObjectType } from '../../lib/data-types';
-
-export const SocialLink: ObjectType = {
+export const SocialLink = defineType({
   name: 'socialLink',
   title: 'Link',
   type: 'object',
   icon: BsLink45Deg,
   fields: [
-    {
+    defineField({
       name: 'type',
       title: 'Type',
       type: 'string',
@@ -19,18 +18,18 @@ export const SocialLink: ObjectType = {
           { title: 'Anders', value: 'other' },
         ],
       },
-    },
-    {
+    }),
+    defineField({
       name: 'url',
       title: 'URL',
       type: 'url',
       validation: (Rule) =>
-        Rule.uri().custom<string>((url, context) => {
-          const urlType = context.parent.type as string | undefined;
+        Rule.uri({}).custom<string>((url, context) => {
+          const urlType = (context.parent as any).type as string | undefined;
 
           if (urlType === 'instagram') {
             return (
-              /\/\/(?:www\.)?instagram/.test(url) ||
+              /\/\/(?:www\.)?instagram/.test(url ?? '') ||
               'Enter a valid instagram URL, or change the URL type'
             );
           }
@@ -44,7 +43,7 @@ export const SocialLink: ObjectType = {
 
           return true;
         }),
-    },
+    }),
   ],
   preview: {
     select: {
@@ -56,4 +55,4 @@ export const SocialLink: ObjectType = {
       title: title[0].toUpperCase() + title.substr(1),
     }),
   },
-};
+});

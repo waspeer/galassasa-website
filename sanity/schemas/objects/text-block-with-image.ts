@@ -1,6 +1,6 @@
-import type { ObjectType } from '../../lib/data-types';
+import { defineType } from 'sanity';
 
-export const TextBlockWithImage: ObjectType<'figure'> = {
+export const TextBlockWithImage = defineType({
   name: 'textBlockWithImage',
   title: 'Tekstblok',
   type: 'object',
@@ -51,4 +51,4 @@ export const TextBlockWithImage: ObjectType<'figure'> = {
       title: 'title',
     },
   },
-};
+});

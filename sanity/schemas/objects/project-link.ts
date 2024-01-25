@@ -1,8 +1,8 @@
 import { BsLink45Deg } from 'react-icons/bs';
 
-import { ObjectType } from '../../lib/data-types';
+import { defineType } from 'sanity';
 
-export const ProjectLink: ObjectType = {
+export const ProjectLink = defineType({
   icon: BsLink45Deg,
   name: 'projectLink',
   title: 'Project',
@@ -21,4 +21,4 @@ export const ProjectLink: ObjectType = {
       validation: (Rule) => Rule.required(),
     },
   ],
-};
+});

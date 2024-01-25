@@ -1,34 +1,30 @@
 {
-  "name": "sanity",
-  "private": true,
+  "name": "@galassasa-website/sanity",
   "version": "1.0.0",
-  "description": "",
-  "main": "package.json",
-  "author": "Wannes Salomé <hello@wannessalome.nl>",
-  "license": "UNLICENSED",
-  "scripts": {
-    "build": "sanity build",
-    "dev": "sanity start",
-    "test": "sanity check"
-  },
+  "private": true,
   "keywords": [
     "sanity"
   ],
+  "license": "UNLICENSED",
+  "main": "package.json",
+  "scripts": {
+    "build": "sanity build",
+    "deploy": "sanity deploy",
+    "deploy-graphql": "sanity graphql deploy",
+    "dev": "sanity dev",
+    "start": "sanity start"
+  },
   "dependencies": {
-    "@sanity/base": "^2.0.5",
-    "@sanity/cli": "^2.0.5",
-    "@sanity/components": "^2.0.5",
-    "@sanity/core": "^2.0.5",
-    "@sanity/default-layout": "^2.0.5",
-    "@sanity/default-login": "^2.0.5",
-    "@sanity/desk-tool": "^2.0.5",
-    "@sanity/vision": "^2.0.5",
-    "prop-types": "^15.7",
-    "react": "^16.14",
-    "react-dom": "^16.14",
-    "react-icons": "^3.11.0"
+    "@sanity/vision": "^3.26.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-icons": "^5.0.1",
+    "react-is": "^18.2.0",
+    "sanity": "^3.26.0",
+    "styled-components": "^6.0.7"
   },
   "devDependencies": {
-    "@types/react": "^16.9.53"
+    "@types/react": "^18.0.25",
+    "typescript": "^5.1.6"
   }
 }

@@ -1,6 +1,6 @@
-import { ImageType } from '../../lib/data-types';
+import { defineType } from 'sanity';
 
-export const Figure: ImageType = {
+export const Figure = defineType({
   name: 'figure',
   title: 'Foto',
   type: 'image',
@@ -19,4 +19,4 @@ export const Figure: ImageType = {
       validation: (Rule) => Rule.required().error('Vul een alternatieve tekst in'),
     },
   ],
-};
+});
