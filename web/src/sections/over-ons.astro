@@ -2,6 +2,7 @@
 import { toHTML } from '@portabletext/to-html';
 import classNames from '@sindresorhus/class-names';
 import { Icon } from 'astro-icon/components';
+import { Image } from 'astro:assets';
 import { imageUrlFor } from '../lib/sanity';
 import type { Persons } from '../lib/types';
 import s from './over-ons.module.css';
@@ -15,11 +16,7 @@ const { persons, selectedPersonId } = Astro.props;
 
 const selectedPerson = selectedPersonId && persons[selectedPersonId];
 
-const photoUrlSmall =
-  selectedPerson && imageUrlFor(selectedPerson.photo).width(300).height(225).url()!;
-
-const photoUrlLarge =
-  selectedPerson && imageUrlFor(selectedPerson.photo).width(700).height(250).url()!;
+const photoUrl = selectedPerson && imageUrlFor(selectedPerson.photo).width(700).height(250).url()!;
 
 function createPersonUrl(path: string) {
   return `/over-ons/${path}`;
@@ -54,20 +51,15 @@ function createPersonUrl(path: string) {
     {
       selectedPerson && (
         <div class={s.details}>
-          <img
-            alt={`${selectedPerson.firstName} ${selectedPerson.lastName}`}
-            class={s.small}
-            src={photoUrlSmall}
-            width="300"
-            height="225"
-          />
-          <img
-            alt={`${selectedPerson.firstName} ${selectedPerson.lastName}`}
-            class={s.large}
-            src={photoUrlLarge}
-            width="700"
-            height="250"
-          />
+          {photoUrl && (
+            <Image
+              alt={`${selectedPerson.firstName} ${selectedPerson.lastName}`}
+              class={s.large}
+              src={photoUrl}
+              width="700"
+              height="250"
+            />
+          )}
 
           {selectedPerson.socialLinks && (
             <ul class={s.socialLinks}>

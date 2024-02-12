@@ -6,8 +6,12 @@ import '../styles/global.css';
 
 import type { Props as SEOProps } from 'astro-seo';
 import { SEO } from 'astro-seo';
+import { Image } from 'astro:assets';
 import type { PartialDeep } from 'type-fest';
+import logo from '../assets/logo.gif';
 import { Menu } from './menu';
+
+import s from './menu.module.css';
 
 interface Props {
   seo: {
@@ -75,7 +79,10 @@ const { description, openGraphImage, openGraphInfo, title } = seo;
   </head>
   <body>
     <slot />
-    <Menu initialPathname={Astro.url.pathname} client:load />
+
+    <Menu initialPathname={Astro.url.pathname} client:load>
+      <Image slot="logo" class={s.logo} src={logo} alt="Studio Galassasa logo" width="450" />
+    </Menu>
 
     <div id="nprogress">
       <div

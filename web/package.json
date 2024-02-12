@@ -24,6 +24,7 @@
     "@sanity/image-url": "^1.0.2",
     "@sindresorhus/class-names": "^2.0.0",
     "@solid-primitives/media": "^2.2.6",
+    "@unpic/astro": "^0.0.43",
     "astro": "^4.2.1",
     "astro-icon": "^1.0.2",
     "astro-seo": "^0.8.0",

@@ -8,6 +8,7 @@ import s from './menu.module.css';
 
 interface MenuProps {
   initialPathname: string;
+  logo: string;
 }
 
 const MENU_ITEMS = [
@@ -34,10 +35,6 @@ export function Menu(props: MenuProps) {
       setForceOpen(window.location.pathname === '/');
     });
   }
-
-  const closeMenu = () => {
-    setPreferOpened(false);
-  };
 
   const toggleMenu = () => {
     setPreferOpened((previousValue) => !previousValue);
@@ -106,7 +103,7 @@ export function Menu(props: MenuProps) {
         aria-labelledby="main-menu-button"
         ref={$nav}
       >
-        <img alt="Galassasa Logo" class={s.logo} src="/images/logo.gif" />
+        {props.logo}
 
         <ul>
           <For each={MENU_ITEMS}>

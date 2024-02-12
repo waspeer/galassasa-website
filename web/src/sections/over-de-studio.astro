@@ -1,6 +1,7 @@
 ---
 import { toHTML } from '@portabletext/to-html';
 import classNames from '@sindresorhus/class-names';
+import { Image } from 'astro:assets';
 import { imageUrlFor } from '../lib/sanity';
 import type { StudioInfo } from '../lib/types';
 import s from './over-de-studio.module.css';
@@ -22,17 +23,17 @@ const extractInstagramUsername = (url: string) => (url.match(/([^/]+)\/?$/) ?? [
   {
     studioInfo.description.map(({ image, text, title }) => (
       <div class={s.textBlock}>
-        <div
+        <Image
+          src={imageUrlFor(image).minHeight(350).minWidth(130).url()}
+          alt={title}
+          width={130}
           class={classNames(s.image, s.portrait)}
-          style={{
-            backgroundImage: `url(${imageUrlFor(image).minHeight(350).minWidth(130).url()})`,
-          }}
         />
-        <div
+        <Image
+          src={imageUrlFor(image).height(75).width(450).url()}
+          alt={title}
+          height={75}
           class={classNames(s.image, s.landscape)}
-          style={{
-            backgroundImage: `url(${imageUrlFor(image).height(75).width(450).url()})`,
-          }}
         />
 
         <h2>{title}</h2>
