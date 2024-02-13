@@ -25,7 +25,7 @@ interface Props {
 
 const { seo } = Astro.props;
 const { description, openGraphImage, openGraphInfo, title } = seo;
-const logoImgUrl = transformUrl({ url: logo.src, width: 450 });
+const logoImgUrl = transformUrl({ url: logo.src, width: 900 });
 ---
 
 <script>
@@ -87,11 +87,11 @@ const logoImgUrl = transformUrl({ url: logo.src, width: 450 });
     <Menu initialPathname={Astro.url.pathname} client:load>
       <Image
         slot="logo"
+        loading="eager"
         class={s.logo}
         src={logo}
         alt="Studio Galassasa logo"
-        width={450}
-        priority={true}
+        width={900}
       />
     </Menu>
 

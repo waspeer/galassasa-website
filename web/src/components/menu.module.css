@@ -1,7 +1,6 @@
 .logo {
   width: 100%;
-  max-width: 450px;
-  @apply mb-8;
+  max-width: 450px !important;
 }
 
 .menu {
