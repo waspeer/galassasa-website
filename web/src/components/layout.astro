@@ -26,6 +26,17 @@ interface Props {
 const { seo } = Astro.props;
 const { description, openGraphImage, openGraphInfo, title } = seo;
 const logoImgUrl = transformUrl({ url: logo.src, width: 900 });
+
+/**
+ * Sets the Cache-Control header to specify how the response
+ * should be cached.
+ *
+ * 'public' - The response can be cached by any cache.
+ * 's-maxage=300' - Shared max-age in seconds. Overrides max-age from the client.
+ * 'stale-while-revalidate=604800' - Allow serving stale content for up to 7 days
+ *   while revalidating in the background.
+ */
+Astro.response.headers.set('Cache-Control', 'public, s-max-age=300 stale-while-revalidate=604800');
 ---
 
 <script>
