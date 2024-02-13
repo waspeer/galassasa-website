@@ -84,7 +84,10 @@ export async function getPersons(): Promise<Persons> {
       throw new Error(`Unable to retrieve person data for ${personId}`);
     }
 
-    acc[personId] = data;
+    acc[personId] = {
+      ...data,
+      imageUrl: imageUrlFor(data.photo).width(700).height(250).url(),
+    };
 
     return acc;
   }, {} as Persons);

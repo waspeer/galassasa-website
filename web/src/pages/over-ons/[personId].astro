@@ -58,6 +58,12 @@ export const getStaticPaths = (async () => {
     <meta name="profile:first_name" content={person.firstName} />
     <meta name="profile:last_name" content={person.lastName} />
     <meta name="profile:gender" content="male" />
+
+    {
+      Object.values(persons).map(
+        (p) => p.imageUrl && <link rel="preload" as="image" href={p.imageUrl} />,
+      )
+    }
   </Fragment>
 
   <OverOnsSection persons={persons} selectedPersonId={selectedPersonId} />

@@ -21,6 +21,7 @@ export interface Person {
   portfolioLink?: string;
   projectLinks?: PersonProjectLink[];
   socialLinks?: PersonSocialLink[];
+  imageUrl?: string;
 }
 
 export type Persons = Record<PersonId, Person>;

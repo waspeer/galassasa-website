@@ -1,9 +1,8 @@
 ---
 import { toHTML } from '@portabletext/to-html';
 import classNames from '@sindresorhus/class-names';
+import { Image } from '@unpic/astro';
 import { Icon } from 'astro-icon/components';
-import { Image } from 'astro:assets';
-import { imageUrlFor } from '../lib/sanity';
 import type { Persons } from '../lib/types';
 import s from './over-ons.module.css';
 
@@ -15,8 +14,6 @@ interface Props {
 const { persons, selectedPersonId } = Astro.props;
 
 const selectedPerson = selectedPersonId && persons[selectedPersonId];
-
-const photoUrl = selectedPerson && imageUrlFor(selectedPerson.photo).width(700).height(250).url()!;
 
 function createPersonUrl(path: string) {
   return `/over-ons/${path}`;
@@ -51,13 +48,13 @@ function createPersonUrl(path: string) {
     {
       selectedPerson && (
         <div class={s.details}>
-          {photoUrl && (
+          {selectedPerson.imageUrl && (
             <Image
               alt={`${selectedPerson.firstName} ${selectedPerson.lastName}`}
               class={s.large}
-              src={photoUrl}
-              width="700"
-              height="250"
+              src={selectedPerson.imageUrl}
+              width={700}
+              height={250}
             />
           )}
 

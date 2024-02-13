@@ -8,7 +8,7 @@ import s from './menu.module.css';
 
 interface MenuProps {
   initialPathname: string;
-  logo: string;
+  logo?: any;
 }
 
 const MENU_ITEMS = [
