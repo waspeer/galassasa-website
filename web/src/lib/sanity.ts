@@ -2,7 +2,14 @@ import { createImageUrlBuilder } from '@sanity/image-url';
 import type { SanityImageObject, SanityImageSource } from '@sanity/image-url';
 import { SANITY_DATASET, SANITY_PROJECT_ID } from 'astro:env/server';
 import { createClient, type ClientConfig } from 'picosanity';
-import { PERSON_IDS, type OpenGraphImage, type Person, type PersonId, type Persons, type StudioInfo } from './types';
+import {
+  PERSON_IDS,
+  type OpenGraphImage,
+  type Person,
+  type PersonId,
+  type Persons,
+  type StudioInfo,
+} from './types';
 
 const OPENGRAPH_IMAGE_WIDTH = 1200;
 const OPENGRAPH_IMAGE_HEIGHT = 630;

@@ -2,21 +2,20 @@
   "name": "galassasa-website",
   "version": "1.0.0",
   "private": true,
-  "repository": "git@github.com:waspeer/galassasa-website.git",
   "license": "MIT",
-  "author": "Wannes Salom\u00e9 <mail@wannessalome.nl>",
+  "author": "Wannes Salomé <mail@wannessalome.nl>",
+  "repository": "git@github.com:waspeer/galassasa-website.git",
   "type": "module",
   "scripts": {
     "dev": "run-p dev:* -l",
     "dev:sanity": "pnpm --filter @galassasa-website/sanity dev",
-    "dev:web": "pnpm --filter @galassasa-website/web dev"
+    "dev:web": "pnpm --filter @galassasa-website/web dev",
+    "prepare": "vp config"
   },
   "devDependencies": {
-    "@waspeer/config": "^1.0.3",
-    "eslint": "^8.57.1",
     "npm-run-all": "^4.1.5",
-    "prettier": "^3.6.2",
-    "typescript": "^6.0.3"
+    "typescript": "^6.0.3",
+    "vite-plus": "catalog:"
   },
   "engines": {
     "node": ">=22.12.0"
