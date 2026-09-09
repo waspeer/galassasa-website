@@ -36,7 +36,7 @@ export const SocialLink = defineType({
 
           if (urlType === 'facebook') {
             return (
-              /\/\/(?:www\.)?(?:[^.]+\.)?facebook/.test(url) ||
+              /\/\/(?:www\.)?(?:[^.]+\.)?facebook/.test(url ?? '') ||
               'Enter a valid facebook URL, or change the URL type'
             );
           }
@@ -52,7 +52,7 @@ export const SocialLink = defineType({
     },
     prepare: ({ subtitle, title }) => ({
       subtitle,
-      title: title[0].toUpperCase() + title.substr(1),
+      title: title ? title[0].toUpperCase() + title.slice(1) : 'Link',
     }),
   },
 });

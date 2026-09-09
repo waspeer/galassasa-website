@@ -8,8 +8,8 @@
   "type": "module",
   "scripts": {
     "dev": "run-p dev:* -l",
-    "dev:sanity": "yarn workspace sanity dev",
-    "dev:web": "yarn workspace web dev"
+    "dev:sanity": "pnpm --filter @galassasa-website/sanity dev",
+    "dev:web": "pnpm --filter @galassasa-website/web dev"
   },
   "devDependencies": {
     "@waspeer/config": "^1.0.3",

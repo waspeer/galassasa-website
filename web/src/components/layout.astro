@@ -38,7 +38,10 @@ const logoImage = await getImage({ src: logo, width: 900 });
  * 'stale-while-revalidate=604800' - Allow serving stale content for up to 7 days
  *   while revalidating in the background.
  */
-Astro.response.headers.set('Cache-Control', 'public, s-max-age=300 stale-while-revalidate=604800');
+Astro.response.headers.set(
+  'Cache-Control',
+  'public, s-maxage=300, stale-while-revalidate=604800',
+);
 ---
 
 <script>
@@ -110,7 +113,6 @@ Astro.response.headers.set('Cache-Control', 'public, s-max-age=300 stale-while-r
 
     <div id="nprogress">
       <div
-        role="bar"
         class="bar"
         style="transform: translate3d(-100%, 0px, 0px); transition: all 200ms ease 0s;"
       >
