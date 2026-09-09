@@ -1,12 +1,17 @@
 ---
 import { toPlainText } from '@portabletext/toolkit';
-import type { GetStaticPaths } from 'astro';
 import Layout from '../../components/layout.astro';
 import { cache, getPersonOpenGraphImage, getPersons } from '../../lib/sanity';
-import type { Persons } from '../../lib/types';
+import { isPersonId } from '../../lib/types';
 import OverOnsSection from '../../sections/over-ons.astro';
 
 const selectedPersonId = Astro.params.personId;
+
+// This route renders on demand, so the path segment is untrusted: anything that
+// is not one of the four known people is a 404 rather than a 500 from Sanity.
+if (!isPersonId(selectedPersonId)) {
+  return new Response(null, { status: 404, statusText: 'Not found' });
+}
 
 const { persons, person, plainBio, openGraphImage } = await cache(
   `over-${selectedPersonId}`,
@@ -28,14 +33,6 @@ const { persons, person, plainBio, openGraphImage } = await cache(
     };
   },
 );
-
-export const getStaticPaths = (async () => {
-  const persons = await getPersons();
-
-  return Object.keys(persons).map((personId) => ({
-    params: { personId: personId as keyof Persons },
-  }));
-}) satisfies GetStaticPaths;
 ---
 
 <Layout

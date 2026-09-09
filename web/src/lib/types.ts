@@ -1,6 +1,12 @@
-import type { SanityImageObject } from '@sanity/image-url/lib/types/types';
+import type { SanityImageObject } from '@sanity/image-url';
 
-export type PersonId = 'joost' | 'ruben' | 'silvan' | 'wannes';
+export const PERSON_IDS = ['joost', 'ruben', 'silvan', 'wannes'] as const;
+
+export type PersonId = (typeof PERSON_IDS)[number];
+
+export function isPersonId(value: string | undefined): value is PersonId {
+  return PERSON_IDS.includes(value as PersonId);
+}
 
 interface PersonProjectLink {
   name: string;

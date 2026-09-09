@@ -6,9 +6,8 @@ import '../styles/global.css';
 
 import type { Props as SEOProps } from 'astro-seo';
 import { SEO } from 'astro-seo';
-import { Image } from 'astro:assets';
+import { getImage, Image } from 'astro:assets';
 import type { PartialDeep } from 'type-fest';
-import { transformUrl } from 'unpic';
 import logo from '../assets/logo.gif';
 import { Menu } from './menu';
 
@@ -25,7 +24,10 @@ interface Props {
 
 const { seo } = Astro.props;
 const { description, openGraphImage, openGraphInfo, title } = seo;
-const logoImgUrl = transformUrl({ url: logo.src, width: 900 });
+// Same call the <Image> in the menu makes, so the preload hits the exact URL
+// the browser will request. (unpic's transformUrl used to be used here, but it
+// returns undefined for a local build asset, which left the preload hrefless.)
+const logoImage = await getImage({ src: logo, width: 900 });
 
 /**
  * Sets the Cache-Control header to specify how the response
@@ -64,7 +66,7 @@ Astro.response.headers.set('Cache-Control', 'public, s-max-age=300 stale-while-r
     <link rel="icon" href="/icon.svg" type="image/svg+xml" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 
-    <link rel="preload" as="image" href={logoImgUrl} />
+    <link rel="preload" as="image" href={logoImage.src} />
 
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />

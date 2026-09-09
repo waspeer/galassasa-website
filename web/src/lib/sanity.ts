@@ -1,21 +1,21 @@
-import createSanityImageUrlBuilder from '@sanity/image-url';
-import type { SanityImageObject, SanityImageSource } from '@sanity/image-url/lib/types/types';
-import createSanityClient, { type ClientConfig } from 'picosanity';
-import { env } from './env';
-import type { OpenGraphImage, Person, Persons, StudioInfo } from './types';
+import { createImageUrlBuilder } from '@sanity/image-url';
+import type { SanityImageObject, SanityImageSource } from '@sanity/image-url';
+import { SANITY_DATASET, SANITY_PROJECT_ID } from 'astro:env/server';
+import { createClient, type ClientConfig } from 'picosanity';
+import { PERSON_IDS, type OpenGraphImage, type Person, type PersonId, type Persons, type StudioInfo } from './types';
 
 const OPENGRAPH_IMAGE_WIDTH = 1200;
 const OPENGRAPH_IMAGE_HEIGHT = 630;
 
 const sanityOptions: ClientConfig = {
-  dataset: env.SANITY_DATASET,
-  projectId: env.SANITY_PROJECT_ID,
+  dataset: SANITY_DATASET,
+  projectId: SANITY_PROJECT_ID,
   useCdn: import.meta.env.PROD,
   apiVersion: '2024-01-25',
 };
 
-const client = createSanityClient(sanityOptions);
-const imageUrlBuilder = createSanityImageUrlBuilder(sanityOptions);
+const client = createClient(sanityOptions);
+const imageUrlBuilder = createImageUrlBuilder(sanityOptions);
 
 // Last modified date of the last fetched data
 let lastModified: string | null = null;
@@ -75,9 +75,7 @@ export async function getPersons(): Promise<Persons> {
       socialLinks,
     }
   `);
-  const personIds = ['joost', 'ruben', 'silvan', 'wannes'] as const;
-
-  return personIds.reduce((acc, personId) => {
+  return PERSON_IDS.reduce((acc, personId) => {
     const data = result.find((p) => p.id === personId);
 
     if (!data) {
@@ -93,7 +91,7 @@ export async function getPersons(): Promise<Persons> {
   }, {} as Persons);
 }
 
-export async function getPersonOpenGraphImage(personId: string): Promise<OpenGraphImage> {
+export async function getPersonOpenGraphImage(personId: PersonId): Promise<OpenGraphImage> {
   const { firstName, lastName, photo } = await client.fetch<Person>(
     /* groq */ `
     *[_type == "person" && _id == $personId] {
