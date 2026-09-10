@@ -49,6 +49,13 @@ Astro.response.headers.set(
   import NProgress from 'nprogress';
   import { dispatchClientNavigationEvent } from '../lib/client-navigation-event';
 
+  // NProgress looks up its bar with `[role="bar"]` by default. The pre-rendered
+  // #nprogress markup below deliberately carries no such role ("bar" is not a
+  // valid ARIA role), so point NProgress at the class instead. Without this
+  // NProgress.start() throws on the very first navigation, which aborts
+  // micromorph's diff — the page never updates and the menu never closes.
+  NProgress.configure({ barSelector: '.bar' });
+
   enableSpaNavigation({
     beforeDiff() {
       NProgress.start();
